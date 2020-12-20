@@ -16,10 +16,14 @@ class BallPage extends StatefulWidget {
 }
 
 class _BallPageState extends State<BallPage> {
-  var ballNumber = 1;
+  var ballNumber = 0;
+  var follower = 0;
 
   @override
   Widget build(BuildContext context) {
+
+    ballNumber = Random().nextInt(5) + 1;
+
     return Scaffold(
       appBar: AppBar(
         title: Text('Ask Me Anything'),
@@ -32,7 +36,11 @@ class _BallPageState extends State<BallPage> {
           child: FlatButton(
             onPressed: (){
              setState(() {
-               ballNumber = Random().nextInt(5) + 1;
+               if(follower == ballNumber){
+                 if (ballNumber < 6) ++ballNumber;
+                 else --ballNumber;
+               }
+               follower = ballNumber;
              });
             },
             child: Image.asset('images/ball$ballNumber.png'),
